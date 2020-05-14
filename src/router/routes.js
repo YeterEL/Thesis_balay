@@ -1,8 +1,10 @@
+import { requireAuth } from './routeGuards'
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/DashboardPage.vue') }
     ]
@@ -31,6 +33,7 @@ const routes = [
   {
     path: '/termsanconditions',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/TermsAndConditions.vue') }
     ]
@@ -38,6 +41,7 @@ const routes = [
   {
     path: '/addhouse',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/AddHousePage.vue') }
     ]
@@ -45,6 +49,7 @@ const routes = [
   {
     path: '/addboarder',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/AddBoarder.vue') }
     ]
@@ -52,6 +57,7 @@ const routes = [
   {
     path: '/house/:house_id',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/HousePage.vue') }
     ]
@@ -59,6 +65,7 @@ const routes = [
   {
     path: '/house/:house_id/edit',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/EditHousePage.vue') }
     ]
@@ -66,6 +73,7 @@ const routes = [
   {
     path: '/boarders/:house_id',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/BoardersPage.vue') }
     ]
@@ -73,6 +81,7 @@ const routes = [
   {
     path: '/boarders/:boarder_id/payment',
     component: () => import('layouts/AppLayout.vue'),
+    beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/Payment.vue') }
     ]

@@ -1,6 +1,10 @@
 <template>
   <q-layout view="hHh Lpr fFf">
-    <q-header v-if="$route.path == '/'" bordered class="bg-white text-indigo">
+    <q-header
+      v-if="$route.path == '/'"
+      bordered
+      class="bg-white text-indigo"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -15,7 +19,11 @@
       </q-toolbar>
     </q-header>
 
-    <q-header v-else bordered class="bg-white text-indigo">
+    <q-header
+      v-else
+      bordered
+      class="bg-white text-indigo"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -29,7 +37,7 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
-<!-- registered user drawer -->
+    <!-- registered user drawer -->
     <q-drawer
       v-model="leftDrawer"
       :width="200"
@@ -42,7 +50,11 @@
           <q-item-section class="row justify-center q-pa-md">
             <div class="column items-center">
               <q-item-section avatar>
-                <q-icon color="indigo" size="60px" name="account_circle"></q-icon>
+                <q-icon
+                  color="indigo"
+                  size="60px"
+                  name="account_circle"
+                ></q-icon>
               </q-item-section>
               <q-item-label class="text-indigo q-mt-sm q-mr-md"> {{ uname }} </q-item-label>
             </div>
@@ -52,7 +64,10 @@
 
         <q-item class="q-mt-sm">
           <q-item-section avatar>
-            <q-icon color="indigo" name="dashboard"></q-icon>
+            <q-icon
+              color="indigo"
+              name="dashboard"
+            ></q-icon>
           </q-item-section>
           <q-item-section>
             <q-item-label>Manage Boarders</q-item-label>
@@ -62,7 +77,10 @@
 
         <q-item class="q-mt-sm">
           <q-item-section avatar>
-            <q-icon color="indigo" name="house"></q-icon>
+            <q-icon
+              color="indigo"
+              name="house"
+            ></q-icon>
           </q-item-section>
           <q-item-section @click="housePage (userId)">
             <q-item-label>Manage House</q-item-label>
@@ -72,7 +90,10 @@
 
         <q-item class="q-mt-sm">
           <q-item-section avatar>
-            <q-icon color="indigo" name="settings_applications"></q-icon>
+            <q-icon
+              color="indigo"
+              name="settings_applications"
+            ></q-icon>
           </q-item-section>
           <q-item-section>
             <q-item-label>Acount Settings</q-item-label>
@@ -82,7 +103,10 @@
 
         <q-item class="q-mt-sm">
           <q-item-section avatar>
-            <q-icon color="indigo" name="help"></q-icon>
+            <q-icon
+              color="indigo"
+              name="help"
+            ></q-icon>
           </q-item-section>
           <q-item-section>
             <q-item-label>About App</q-item-label>
@@ -92,7 +116,10 @@
 
         <q-item class="q-mt-sm">
           <q-item-section avatar>
-            <q-icon color="red" name="exit_to_app"></q-icon>
+            <q-icon
+              color="red"
+              name="exit_to_app"
+            ></q-icon>
           </q-item-section>
           <q-item-section @click="logoutUser">
             <q-item-label>Log out</q-item-label>
@@ -102,7 +129,7 @@
 
       </q-list>
     </q-drawer>
-<!-- guess user drawer -->
+    <!-- guess user drawer -->
     <q-drawer
       v-model="leftDrawer"
       :width="200"
@@ -115,7 +142,11 @@
           <q-item-section class="row justify-center q-pa-md">
             <div class="column items-center">
               <q-item-section avatar>
-                <q-icon color="indigo" size="60px" name="account_circle"></q-icon>
+                <q-icon
+                  color="indigo"
+                  size="60px"
+                  name="account_circle"
+                ></q-icon>
               </q-item-section>
               <q-item-label class="text-indigo q-mt-sm q-mr-md"> Login </q-item-label>
             </div>
@@ -125,7 +156,10 @@
 
         <q-item>
           <q-item-section avatar>
-            <q-icon color="indigo" name="person"></q-icon>
+            <q-icon
+              color="indigo"
+              name="person"
+            ></q-icon>
           </q-item-section>
           <q-item-section @click="loginPage">
             <q-item-label>Login</q-item-label>
@@ -135,7 +169,10 @@
 
         <q-item>
           <q-item-section avatar>
-            <q-icon color="indigo" name="person_add"></q-icon>
+            <q-icon
+              color="indigo"
+              name="person_add"
+            ></q-icon>
           </q-item-section>
           <q-item-section @click="registerPage">
             <q-item-label>Register</q-item-label>
@@ -145,7 +182,10 @@
 
         <q-item>
           <q-item-section avatar>
-            <q-icon color="indigo" name="help_outline"></q-icon>
+            <q-icon
+              color="indigo"
+              name="help_outline"
+            ></q-icon>
           </q-item-section>
           <q-item-section>
             <q-item-label>About App</q-item-label>
@@ -173,11 +213,14 @@ export default {
       userId: ''
     }
   },
-  created () {
-    firebase.auth().onAuthStateChanged((user) => {
-      this.authStatus = user
-      this.userId = user.uid
-      this.uname = user.displayName
+  async created () {
+    await firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user)
+        this.authStatus = user
+        this.userId = user.uid
+        this.uname = user.displayName
+      }
     })
   },
   methods: {

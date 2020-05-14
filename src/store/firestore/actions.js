@@ -125,6 +125,23 @@ export function retrieveDueDate (context, payload) {
     })
 }
 
+export function verifyEmail (context) {
+  let currentUser = firebase.auth().currentUser
+  currentUser.sendEmailVerification({
+    url: 'https://www.example.com/?email=' + currentUser.email,
+    handleCodeInApp: true
+  })
+    .then(() => {
+      // Verification email sent.
+      console.log('Verification sent')
+      console.log(currentUser.emailVerified)
+    })
+    .catch(error => {
+      // Error occurred. Inspect error.code.
+      console.log('Fail to send verification sent', error)
+    })
+}
+
 // register user
 export function registerUser (context, payload) {
   firebase
@@ -162,12 +179,11 @@ export function registerUser (context, payload) {
 
 // Login user
 export function loginUser (context, payload) {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(payload.email, payload.password)
-    .then(() => {
-      console.log('Login sucessful')
-    })
+  return (
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(payload.email, payload.password)
+  )
 }
 
 // Logout user
@@ -352,7 +368,7 @@ export function updateDueDate (context, payload) {
       context.commit('updateHouse', payload)
     })
     .catch(function (error) {
-    // The document probably doesn't exist.
+      // The document probably doesn't exist.
       console.error('Error updating document: ', error)
     })
 }
@@ -396,7 +412,7 @@ export function updateHouseBoarders (context, payload) {
       context.commit('updateHouse', payload)
     })
     .catch(function (error) {
-    // The document probably doesn't exist.
+      // The document probably doesn't exist.
       console.error('Error updating document: ', error)
     })
 }
@@ -412,7 +428,7 @@ export function updatePaidBoarders (context, payload) {
       context.commit('updateHouse', payload)
     })
     .catch(function (error) {
-    // The document probably doesn't exist.
+      // The document probably doesn't exist.
       console.error('Error updating document: ', error)
     })
 }

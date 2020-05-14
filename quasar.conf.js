@@ -86,7 +86,10 @@ module.exports = function (ctx) {
       ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+
+        'Dialog'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -180,7 +183,6 @@ module.exports = function (ctx) {
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
       id: 'org.cordova.quasar.app'
     },
-
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
     capacitor: {
