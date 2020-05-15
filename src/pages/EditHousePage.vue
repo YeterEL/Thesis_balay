@@ -13,7 +13,7 @@
               thumbnails
               infinite
               autoplay
-              height="150px"
+              height="200px"
             >
               <q-carousel-slide v-for="(image, i) in googleImages" :key="i" :name="i" :img-src="image.image_url" />
             </q-carousel>
@@ -34,6 +34,22 @@
                 <q-input color="indigo" square autogrow v-model="address">
                   <template v-slot:prepend>
                     <q-icon name="place" />
+                  </template>
+                  <template v-slot:append>
+                    <q-icon name="edit" />
+                  </template>
+                </q-input>
+                <q-input color="indigo" label="Smart " stack-label square autogrow v-model="contact_number1">
+                  <template v-slot:prepend>
+                    <q-icon name="phone" />
+                  </template>
+                  <template v-slot:append>
+                    <q-icon name="edit" />
+                  </template>
+                </q-input>
+                 <q-input color="indigo" label="Globe " stack-label square autogrow v-model="contact_number2">
+                  <template v-slot:prepend>
+                    <q-icon name="phone" />
                   </template>
                   <template v-slot:append>
                     <q-icon name="edit" />
@@ -136,6 +152,8 @@ export default {
         max: this.singleHouse[house].price_max
       }
       this.available_room = this.singleHouse[house].available_room
+      this.contact_number1 = this.singleHouse[house].contact_number1
+      this.contact_number2 = this.singleHouse[house].contact_number2
       this.wifi = this.singleHouse[house].wifi
     }
   },
@@ -150,6 +168,8 @@ export default {
       price_max: 0,
       price_min: 0,
       available_room: 0,
+      contact_number1: null,
+      contact_number2: null,
       wifi: null,
       slide: 1,
       like: false,
@@ -204,6 +224,8 @@ export default {
         details: this.details,
         price_max: this.price.max,
         price_min: this.price.min,
+        contact_number1: this.contact_number1,
+        contact_number2: this.contact_number2,
         available_room: Number(this.available_room),
         wifi: this.wifi
       })

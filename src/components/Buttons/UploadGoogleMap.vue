@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn @click="onPickFile" icon="image" color="primary" class="full-width" outline rounded label="Upload House image" />
+    <q-btn @click="onPickFile" icon="image" color="primary" class="full-width" outline rounded label="Upload Google map screenshot" />
     <q-input type="file" style="display:none" ref="fileInput" accept="image/*" @change="uploadImage" />
   </div>
 </template>

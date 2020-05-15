@@ -70,6 +70,16 @@
             />
           </template>
         </q-input>
+        <span class="text-caption q-my-sm text-indigo-6 text-right q-ma-none q-pa-none">
+          <q-btn
+            flat
+            @click="$router.replace('/login')"
+            no-caps
+            dense
+          >
+            Already have an account
+          </q-btn>
+        </span>
         <!-- v-if="this.userName && this.email && this.password && this.password == this.confirm" -->
         <q-btn
           type="submit"

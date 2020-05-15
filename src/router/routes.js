@@ -7,6 +7,9 @@ const routes = [
     beforeEnter: requireAuth,
     children: [
       { path: '', component: () => import('pages/DashboardPage.vue') }
+      // { path: 'login', component: () => import('pages/DashboardPage.vue') },
+      // { path: 'register', component: () => import('pages/DashboardPage.vue') },
+      // { path: 'addhouse', component: () => import('pages/DashboardPage.vue') }
     ]
   },
   {

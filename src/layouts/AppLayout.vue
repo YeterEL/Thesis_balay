@@ -148,7 +148,6 @@
                   name="account_circle"
                 ></q-icon>
               </q-item-section>
-              <q-item-label class="text-indigo q-mt-sm q-mr-md"> Login </q-item-label>
             </div>
           </q-item-section>
         </q-item>

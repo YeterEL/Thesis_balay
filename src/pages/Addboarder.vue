@@ -82,6 +82,9 @@ export default {
     },
     numberOfBoarders () {
       return this.$store.state.firestore.numberOfBoarders
+    },
+    vacancy () {
+      return this.$store.state.firestore.vacancy
     }
   },
   methods: {
@@ -99,6 +102,10 @@ export default {
       this.$store.dispatch('firestore/updateHouseBoarders', {
         id: this.houseId,
         boarder: this.numberOfBoarders + 1
+      })
+      this.$store.dispatch('firestore/updateHouseVacancy', {
+        id: this.houseId,
+        vacancy: this.vacancy - 1
       })
       this.$router.go(-1)
       var boarders = this.numberOfBoarders + 1

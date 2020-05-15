@@ -18,6 +18,11 @@ export function retrieveHouseBoarders (state, payload) {
   state.numberOfBoarders = payload
 }
 
+// retrieve single house vacancy
+export function retrieveVacancy (state, payload) {
+  state.vacancy = payload
+}
+
 // retrieve single house paid boarders
 export function retrievePaidBoarders (state, payload) {
   state.paidBoarders = payload
@@ -56,6 +61,9 @@ export function addHouse (state, payload) {
     price_max: payload.price_max,
     price_min: payload.price_min,
     available_room: payload.available_room,
+    boarders: payload.boarders,
+    paid_boarders: payload.paid_boarders,
+    vacancy: payload.vacancy,
     wifi: payload.wifi,
     uploadedBy: payload.uploadedBy,
     images: payload.images
@@ -100,6 +108,7 @@ export function updateHouse (state, payload) {
     price_max: payload.price_max,
     price_min: payload.price_min,
     available_room: payload.available_room,
+    vacancy: payload.vacancy,
     wifi: payload.wifi
   })
 }

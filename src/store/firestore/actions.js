@@ -26,12 +26,12 @@ export function retrieveSingleHouse (context, payload) {
           price_max: doc.data().price_max,
           price_min: doc.data().price_min,
           available_room: doc.data().available_room,
+          vacancy: doc.data().vacancy,
+          numberOfReviews: doc.data().numberOfReviews,
           uploadedBy: doc.data().uploadedBy,
           wifi: doc.data().wifi,
           rate: doc.data().rate,
-          reacted: doc.data().reacted,
           due_date: doc.data().due_date,
-          numberOfComments: doc.data().numberOfComments,
           loading: true
         }
         payload.push(singleHouse)
@@ -87,6 +87,23 @@ export function retrieveHouseBoarders (context, payload) {
       querySnapshot.forEach(doc => {
         var numberOfBoarders = doc.data().boarders
         context.commit('retrieveHouseBoarders', numberOfBoarders)
+      })
+    })
+}
+
+// retrive user house
+export function retrieveVacancy (context, payload) {
+  db.collection('houses')
+    .where(
+      'user_id',
+      '==',
+      payload
+    )
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach(doc => {
+        var vacancy = doc.data().vacancy
+        context.commit('retrieveVacancy', vacancy)
       })
     })
 }
@@ -214,10 +231,13 @@ export function addHouse (context, payload) {
       distance: payload.distance,
       contact_number1: payload.contact_number1,
       contact_number2: payload.contact_number2,
-      details: 'Please add your house details for more information about your house',
+      details: payload.details,
       price_max: payload.price_max,
       price_min: payload.price_min,
       available_room: payload.available_room,
+      boarders: payload.boarders,
+      paid_boarders: payload.paid_boarders,
+      vacancy: payload.vacancy,
       wifi: payload.wifi,
       uploadedBy: payload.uploadedBy,
       images: payload.images
@@ -231,10 +251,13 @@ export function addHouse (context, payload) {
         distance: payload.distance,
         contact_number1: payload.contact_number1,
         contact_number2: payload.contact_number2,
-        details: 'Please add your house details for more information about your house',
+        details: payload.details,
         price_max: payload.price_max,
         price_min: payload.price_min,
         available_room: payload.available_room,
+        boarders: payload.boarders,
+        paid_boarders: payload.paid_boarders,
+        vacancy: payload.vacancy,
         wifi: payload.wifi,
         uploadedBy: payload.uploadedBy,
         images: payload.images
@@ -339,6 +362,9 @@ export function updateHouse (context, payload) {
       price_max: payload.price_max,
       price_min: payload.price_min,
       available_room: payload.available_room,
+      contact_number1: payload.contact_number1,
+      contact_number2: payload.contact_number2,
+      vacancy: payload.vacancy,
       wifi: payload.wifi
     }).then(docRef => {
       context.commit('updateHouse', {
@@ -351,6 +377,9 @@ export function updateHouse (context, payload) {
         price_max: payload.price_max,
         price_min: payload.price_min,
         available_room: payload.available_room,
+        contact_number1: payload.contact_number1,
+        contact_number2: payload.contact_number2,
+        vacancy: payload.vacancy,
         wifi: payload.wifi
       })
       console.log('Upload Successful')
@@ -417,7 +446,23 @@ export function updateHouseBoarders (context, payload) {
     })
 }
 
-// Update house boarders
+// Update vacancy
+export function updateHouseVacancy (context, payload) {
+  db.collection('houses')
+    .doc(payload.id)
+    .update({
+      vacancy: Number(payload.vacancy)
+    }).then(() => {
+      console.log('Document successfully updated!')
+      context.commit('updateHouse', payload)
+    })
+    .catch(function (error) {
+      // The document probably doesn't exist.
+      console.error('Error updating document: ', error)
+    })
+}
+
+// Update paid boarders
 export function updatePaidBoarders (context, payload) {
   db.collection('houses')
     .doc(payload.id)

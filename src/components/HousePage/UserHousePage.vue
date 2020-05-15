@@ -28,16 +28,27 @@
                 <div class="text-h6 text-weight-medium"> {{ house.house_name }} </div>
                 <div> {{ house.address }} </div>
                 <div>
-                  <q-rating
-                    v-model="ratingModel"
+                  <div>
+                   <q-rating
+                    v-model="house.rate"
+                    max="5"
                     size="1.5em"
-                    icon="star"
-                  />
+                    color="warning"
+                    icon="star_border"
+                    icon-selected="star"
+                    icon-half="star_half"
+                    no-dimming
+                />
+                  ( {{ house.numberOfReviews }} )
+                </div>
                 </div>
               </q-card-section>
               <q-card-section>
                 <div class="text-subtitle2">House Information : </div>
                 <div> {{ house.details }} </div>
+                <div class="text-subtitle2 q-mt-md">Contact Information : </div>
+                <div> Smart: {{ house.contact_number1 }} </div>
+                <div> Globe: {{ house.contact_number2 }} </div>
               </q-card-section>
               <q-card-section>
                 <q-list class="row justify-between">
@@ -69,7 +80,7 @@
                     </q-item-section>
 
                     <q-item-section>
-                      <q-item-label>Vacancy<q-badge :color="color (house.available_room)" floating>{{ house.available_room }}</q-badge></q-item-label>
+                      <q-item-label>Vacancy<q-badge :color="color (house.vacancy)" floating>{{ house.vacancy }}</q-badge></q-item-label>
                     </q-item-section>
                   </q-item>
 
@@ -93,25 +104,7 @@
                     </q-item-section>
                   </q-item>
                 </q-list>
-                <q-separator />
-                <div class="row justify-between q-ma-sm">
-                  <q-card-actions>
-                      <q-btn @click="modal = true" color="indigo" flat size="18px" icon="favorite_border" :label="house.likes" />
-                  </q-card-actions>
-                  <q-card-actions>
-                    <q-btn color="indigo" flat size="18px" icon="comment" :label="house.numberOfComments" />
-                  </q-card-actions>
-                </div>
               </q-card-section>
-          </q-card>
-          <q-card v-for="(comment, i) in comments" :key="i" flat class="q-mt-sm bg-blue-grey-1">
-            <q-card-section class="text-weight-medium">
-              {{ comment.userName }}
-            </q-card-section>
-            <q-card-section class="row">
-              <!-- <div class="col-2"></div> -->
-              <div> {{ comment.comment }} </div>
-            </q-card-section>
           </q-card>
         </div>
       </div>
@@ -129,8 +122,7 @@ export default {
       slide: 1,
       like: false,
       modal: false,
-      inquire: false,
-      ratingModel: 4
+      inquire: false
     }
   },
   computed: {

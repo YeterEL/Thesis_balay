@@ -124,6 +124,10 @@ export default {
       this.userId
     )
     this.$store.dispatch(
+      'firestore/retrieveVacancy',
+      this.userId
+    )
+    this.$store.dispatch(
       'firestore/retrieveHouseId',
       this.userId
     )

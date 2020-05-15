@@ -82,16 +82,17 @@ export default {
   },
   methods: {
     addBoarder () {
-      this.$store.dispatch('firestore/addBoarder', {
-        owner_id: this.$route.params.house_id,
-        full_name: this.full_name,
-        address: this.address,
-        phone: this.phone,
-        rent: this.rent,
-        balance: Number(this.rent),
-        room: this.room,
-        status: 'unpaid'
-      })
+      console.log(this.$route.params.house_id, this.full_name, this.address)
+      // this.$store.dispatch('firestore/addBoarder', {
+        // owner_id: this.$route.params.house_id,
+        // full_name: this.full_name,
+        // address: this.address,
+        // phone: this.phone,
+        // rent: this.rent,
+        // balance: Number(this.rent),
+        // room: this.room,
+        // status: 'unpaid'
+      // })
     }
   }
 }

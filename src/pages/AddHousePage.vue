@@ -1,6 +1,7 @@
 <template>
   <q-page class="q-pa-md">
     <div class="text-h6 text-weight-medium text-indigo q-mb-md">House Information</div>
+    <div class="text-subtitle text-weight-small text-indigo q-mb-md">Add your house first to continue (you can only add one house)</div>
     <div class="q-gutter-y-xs column">
         <q-input
           color="indigo"
@@ -147,11 +148,14 @@ export default {
         price_max: this.price.max,
         price_min: this.price.min,
         available_room: Number(this.rooms),
+        boarders: 0,
+        paid_boarders: 0,
+        vacancy: 0,
         wifi: this.wifi,
         images: this.images,
         uploadedBy: this.uploadedBy
       })
-      this.$router.go(-1)
+      this.$router.push('/')
     }
   }
 }

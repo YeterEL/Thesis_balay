@@ -10,5 +10,6 @@ export default {
   houseId: '',
   due_date: null,
   numberOfBoarders: 0,
-  paidBoarders: 0
+  paidBoarders: 0,
+  vacancy: 0
 }
